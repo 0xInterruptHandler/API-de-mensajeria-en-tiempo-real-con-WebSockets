@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const SchemaHabitacion = new mongoose.Schema({
   HabitacionNombre: { type: String, required: true, unique: true },
@@ -6,4 +6,6 @@ const SchemaHabitacion = new mongoose.Schema({
   HabitacionFechaCreacion: { type: Date, default: Date.now },
  });
 
-module.exports = mongoose.model('Habitacion', SchemaHabitacion);
+ 
+const Habitacion = mongoose.model('Habitacion', SchemaHabitacion);
+export default Habitacion;

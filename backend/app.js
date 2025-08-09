@@ -1,24 +1,36 @@
- 
-import AuthRoutes from './Routes/AuthRutas.js';
- 
-
 // app.js
-import express from 'express'
-import dotenv from 'dotenv'
-import cors from 'cors'
-import cookieParser from 'cookie-parser'
- 
-dotenv.config()
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
-const app = express()
+// Rutas
+import AuthRutas from "./Routes/AuthRutas.js";
+import HabitacionRutas from "./Routes/HabitacionRutas.js";
+import MensajeRutas from "./Routes/MensajeRutas.js";
 
-app.use(express.json())
-app.use(cors())
-app.use(cookieParser())
-app.use('/api/auth', AuthRoutes)
+// Configuración de variables de entorno
+dotenv.config();
 
-app.get('/', (req, res) => {
-  res.send('test')
-})
+const app = express();
 
-export default app
+// Middlewares globales
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || "*", // Ajustar según frontend
+  credentials: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Rutas API
+app.use("/api/auth", AuthRutas);
+app.use("/api/habitaciones", HabitacionRutas);
+app.use("/api", MensajeRutas);
+
+// Ruta de prueba
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Servidor backend activo" });
+});
+
+export default app;

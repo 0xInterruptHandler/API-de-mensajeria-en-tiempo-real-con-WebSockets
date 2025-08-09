@@ -1,13 +1,23 @@
- 
-import app from './app.js'
-import DBConexion from './utils/db.js'
+// server.js
+import http from "http";
+import dotenv from "dotenv";
+import app from "./app.js";
+import { inicializarSocket } from "./utils/socket.js";
+import conectarDB from "./utils/db.js";
 
-const PORT = process.env.PORT || 3000
+dotenv.config();
 
-DBConexion().then(() => {
-  app.listen(PORT, () => {
-    console.log(`servidor ejecutandose en el puerto: ${PORT}`)
-  })
-}).catch(err => {
-  console.error('Error al conectar a la base de datos:', err)
-})
+// Conexión a la base de datos
+conectarDB();
+
+// Crear servidor HTTP
+const server = http.createServer(app);
+
+// Inicializar Socket.IO
+inicializarSocket(server);
+
+// Puerto de escucha
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`);
+});

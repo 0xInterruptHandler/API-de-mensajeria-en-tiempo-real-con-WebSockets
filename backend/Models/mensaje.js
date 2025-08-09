@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const SchemaMensaje = new mongoose.Schema({
-  remitente: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  contenido: { type: String, required: true },
-  FechaCreacion: { type: Date, default: Date.now },
+  MensajeRemitente: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
+  MensajeContenido: { type: String, required: true },
+  MensajeFechaCreacion: { type: Date, default: Date.now },
   MensajeSala: { type: mongoose.Schema.Types.ObjectId, ref: 'Habitacion' }
 });
 

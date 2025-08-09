@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const SchemaUsuario = new mongoose.Schema({
  
     UsuarioNombre: { type: String, required: true },
-    correo: { type: String, required: true, unique: true },
-    password: { type: String, required: true },  
+    UsuarioCorreo: { type: String, required: true, unique: true },
+    UsuarioPassword: { type: String, required: true },  
  
-    FechaCreacion: { type: Date, default: Date.now }
+    UsuarioFechaCreacion: { type: Date, default: Date.now }
 });
 
 export const ModeloUsuario =  mongoose.model('Usuario', SchemaUsuario);
